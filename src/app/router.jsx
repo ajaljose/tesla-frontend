@@ -1,5 +1,5 @@
 import AppLayout from "layout/AppLayout";
-import { landingRoutes } from "pages/landing/route";
+import { landingRoutes } from "pages/landing/landing.route";
 import { createBrowserRouter } from "react-router-dom";
 
 export const router = createBrowserRouter([
@@ -8,11 +8,7 @@ export const router = createBrowserRouter([
     element: <AppLayout />,
     errorElement: <h1>Unexpected error occured</h1>,
     children: [
-      {
-        path: 'landing',
-        children: landingRoutes,
-        errorElement: <h1>Unexpected error occured</h1>,
-      },
+      ...landingRoutes,
       {
         path: "*",
         element: <h1>Unexpected error occured</h1>,

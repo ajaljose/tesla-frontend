@@ -1,10 +1,10 @@
 import { lazy } from "react";
 
-const Landing = lazy(() => import("./Landing"));
+const Landing = lazy(() => import("./components/Landing"));
 
 export const landingRoutes = [
   {
-    path: "", // change to correct url accordingly
+    path: "landing",
     element: <Landing />,
   },
 ];

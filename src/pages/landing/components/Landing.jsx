@@ -1,11 +1,14 @@
 import React from 'react'
-import { useGetSampleByIdQuery } from './services';
+import { useGetSampleByIdQuery } from '../services';
+import HeroSection from './HeroSection';
 
 const Landing = () => {
     const { data } = useGetSampleByIdQuery(1);
     console.log('data', data)
     return (
-        <div className='bg-yellow-500 min-h-screen'>Landing</div>
+        <div className=''>
+            <HeroSection />
+        </div>
     )
 }
 

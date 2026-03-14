@@ -1,10 +1,16 @@
+/** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
+    content: [
+        "./index.html",
+        "./src/**/*.{js,ts,jsx,tsx}",
+    ],
+    theme: {
+        extend: {
+            boxShadow: {
+                // card: "rgba(0,0,0,0.02) 0px 1px 3px 0px, rgba(27,31,35,0.15) 0px 0px 0px 1px",
+                // card: "rgba(0,0,0,0.25) 0px 54px 55px, rgba(0,0,0,0.12) 0px -12px 30px, rgba(0,0,0,0.12) 0px 4px 6px, rgba(0,0,0,0.17) 0px 12px 13px, rgba(0,0,0,0.09) 0px -3px 5px",
+            },
+        },
+    },
+    plugins: [],
 }
