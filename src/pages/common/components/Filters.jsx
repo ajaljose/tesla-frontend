@@ -1,3 +1,5 @@
+import CustomButton from "./CustomButton";
+
 const Filters = ({ search, setSearch }) => {
     return (
         <div className="bg-white shadow rounded-xl p-4 flex flex-wrap gap-4 mb-10">
@@ -22,9 +24,13 @@ const Filters = ({ search, setSearch }) => {
                 <option>Any Performance</option>
             </select>
 
-            <button className="bg-red-600 text-white px-4 py-2 rounded flex-1 min-w-[150px] h-10 hover:bg-red-700 transition">
+            <CustomButton
+                variant="primary"
+                size="sm"
+                onClick={() => console.log("Order Model S Plaid")}
+            >
                 Apply Filters
-            </button>
+            </CustomButton>
 
         </div>
     );

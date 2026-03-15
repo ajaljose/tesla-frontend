@@ -1,5 +1,6 @@
 import FeatureStat from "pages/common/components/FeatureStat";
 import FeatureCardsSection from "./FeatureCardSection";
+import CustomButton from "pages/common/components/CustomButton";
 
 const heroImage =
     "https://digitalassets.tesla.com/tesla-contents/image/upload/b_rgb:FFFFFF,c_pad,dpr_2.0,f_auto,h_1080,q_auto,w_1920/c_pad,h_1080,w_1920/v1770413070/Group_44?pgw=1";
@@ -37,13 +38,24 @@ const HeroSection = () => {
                     </p>
 
                     <div className="flex items-center gap-6 mt-8">
-                        <button className="bg-red-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-red-700">
-                            Explore Now
-                        </button>
 
-                        <button className="flex items-center gap-2 text-gray-700">
+                        <CustomButton
+                            variant="primary"
+                            size="lg"
+                            onClick={() => console.log("Explore")}
+                            rounded="full"
+                        >
+                            Explore Now
+                        </CustomButton>
+
+                        <CustomButton
+                            variant="secondary"
+                            size="lg"
+                            onClick={() => console.log("Explore")}
+                            rounded="full"
+                        >
                             ▶ Watch Demo
-                        </button>
+                        </CustomButton>
                     </div>
                 </div>
 

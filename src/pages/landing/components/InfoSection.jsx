@@ -1,3 +1,5 @@
+import CustomButton from "pages/common/components/CustomButton";
+
 const InfoSection = () => {
     const {
         title,
@@ -48,7 +50,7 @@ const InfoSection = () => {
                         {description}
                     </p>
 
-                    <div className="flex gap-14 mt-10">
+                    <div className="flex gap-14 my-10">
                         {stats.map((stat, index) => (
                             <div key={index} className={index !== 0 ? "border-l border-gray-300 pl-14" : ""}>
                                 <h3 className="text-3xl font-semibold">{stat.value}</h3>
@@ -56,11 +58,14 @@ const InfoSection = () => {
                             </div>
                         ))}
                     </div>
-
-                    <button className="mt-8 bg-red-600 text-white px-6 py-3 rounded-full font-medium hover:bg-red-700">
+                    <CustomButton
+                        variant="primary"
+                        size="sm"
+                        onClick={() => console.log("Order Model S Plaid")}
+                        rounded="full"
+                    >
                         {buttonText}
-                    </button>
-
+                    </CustomButton>
                 </div>
             </div>
         </section>

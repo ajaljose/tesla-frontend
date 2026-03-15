@@ -7,6 +7,7 @@ const ProductList = () => {
     const cars = [
         {
             id: 1,
+            slug: 'model-s',
             name: "Model S",
             range: "405 mi",
             price: 'Rs100000',
@@ -16,6 +17,7 @@ const ProductList = () => {
         },
         {
             id: 2,
+            slug: 'model-3',
             name: "Model 3",
             range: "358 mi",
             price: 'Rs100000',
@@ -25,6 +27,7 @@ const ProductList = () => {
         },
         {
             id: 3,
+            slug: 'model-x',
             name: "Model X",
             range: "348 mi",
             price: 'Rs100000',
@@ -34,6 +37,7 @@ const ProductList = () => {
         },
         {
             id: 4,
+            slug: 'model-y',
             name: "Model Y",
             range: "396 mi",
             price: 'Rs100000',

@@ -4,6 +4,8 @@ import ColorSelector from "pages/common/components/ColorSelector";
 import CarOverview from "./CarOverview";
 import VariantList from "./VariantList";
 import Specifications from "./Specifications";
+import BuildPriceDrawer from "./build-car/BuildPriceDrawer";
+import { useParams } from "react-router-dom";
 
 const carData = {
     id: "model-3",
@@ -36,7 +38,8 @@ const carData = {
 
 const CarDetails = () => {
     const [selectedColor, setSelectedColor] = useState("white");
-
+    const [openConfigurator, setOpenConfigurator] = useState(false);
+    const { slug } = useParams();
     return (
         <div className="max-w-6xl mx-auto px-6 py-10">
 
@@ -70,12 +73,17 @@ const CarDetails = () => {
             {/* Build Button */}
             <div className="mt-12 flex justify-center">
                 <button
+                    onClick={() => setOpenConfigurator(true)}
                     className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-xl text-lg font-medium transition"
                 >
                     Build and Price →
                 </button>
             </div>
-
+            <BuildPriceDrawer
+                open={openConfigurator}
+                onClose={() => setOpenConfigurator(false)}
+                slug={slug}
+            />
         </div>
     );
 };

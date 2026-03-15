@@ -1,14 +1,17 @@
+import { useNavigate } from "react-router-dom";
+import CustomButton from "./CustomButton";
+import { PATHS } from "../constants";
+
 const CarCard = ({ car }) => {
+    const navigate = useNavigate()
     return (
         <div className="group relative rounded-xl overflow-hidden shadow-md hover:shadow-xl transition">
 
-            {/* Background Image */}
             <div
                 className="h-64 bg-cover bg-center"
                 style={{ backgroundImage: `url(${car.image})` }}
             ></div>
 
-            {/* Sliding Content + Gradient */}
             <div
                 className="
         absolute bottom-0 left-0 w-full
@@ -17,14 +20,11 @@ const CarCard = ({ car }) => {
       "
             >
 
-                {/* Gradient Background */}
                 <div className="bg-gradient-to-t from-white via-white/80 to-transparent p-4">
 
-                    {/* Always Visible */}
                     <h3 className="text-xl font-semibold">{car.name}</h3>
                     <p className="text-gray-700 font-medium">{car.price}</p>
 
-                    {/* Hidden until hover */}
                     <div
                         className="
             mt-3 opacity-0 max-h-0 overflow-hidden
@@ -33,7 +33,7 @@ const CarCard = ({ car }) => {
             group-hover:max-h-40
           "
                     >
-                        <div className="flex justify-between text-gray-800">
+                        <div className="flex justify-between text-gray-800 mb-4">
 
                             <div>
                                 <p className="font-semibold">{car.range}</p>
@@ -47,9 +47,14 @@ const CarCard = ({ car }) => {
 
                         </div>
 
-                        <button className="mt-3 bg-red-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-red-700">
+
+                        <CustomButton
+                            variant="primary"
+                            size="sm"
+                            onClick={() => navigate(PATHS.CAR_DETAILS.replace(':id', car.slug))}
+                        >
                             View Details
-                        </button>
+                        </CustomButton>
                     </div>
 
                 </div>

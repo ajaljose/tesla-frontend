@@ -1,3 +1,5 @@
+import CustomButton from "pages/common/components/CustomButton";
+
 const PerformanceSection = () => {
     const bgImage =
         "https://images.unsplash.com/photo-1536617621572-1d5f1e6269a0";
@@ -17,14 +19,20 @@ const PerformanceSection = () => {
                         Unmatched <br /> Performance
                     </h2>
 
-                    <p className="text-gray-700 mt-4 leading-relaxed">
+                    <p className="text-gray-700 mt-4 leading-relaxed mb-6">
                         Experience the thrill of instantaneous torque and cutting-edge
                         speed. Tesla sets the standard for electric vehicle performance.
                     </p>
 
-                    <button className="mt-6 bg-red-600 text-white px-6 py-3 rounded-full font-medium hover:bg-red-700">
+
+                    <CustomButton
+                        variant="primary"
+                        size="sm"
+                        onClick={() => console.log("Order Model S Plaid")}
+                        rounded="full"
+                    >
                         Order Model S Plaid
-                    </button>
+                    </CustomButton>
                 </div>
 
                 <div className="flex gap-16 mt-20">
