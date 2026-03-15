@@ -1,22 +1,25 @@
 import React, { useState } from "react";
 import teslaLogo from "../../assets/tesla-text-logo.png";
+import { PATHS } from "pages/common/constants";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
-
+    const navigate = useNavigate()
     return (
         <nav className="w-full bg-white px-6 md:px-8 py-3 flex items-center justify-between shadow-sm relative">
 
-            <div className="flex items-center">
+            <div className="flex items-center cursor-pointer">
                 <img
                     src={teslaLogo}
                     alt="Tesla Logo"
                     className="h-4 object-contain"
+                    onClick={() => navigate(PATHS.LANDING)}
                 />
             </div>
 
             <div className="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-700">
-                <a href="#" className="hover:text-black">Vehicles</a>
+                <a href={PATHS.PRODUCT_LIST} className="hover:text-black">Vehicles</a>
                 <a href="#" className="hover:text-black">Energy</a>
                 <a href="#" className="hover:text-black">Charging</a>
                 <a href="#" className="hover:text-black">Discover</a>
