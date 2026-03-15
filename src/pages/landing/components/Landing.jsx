@@ -1,5 +1,5 @@
 import React from 'react'
-import { useGetSampleByIdQuery } from '../services';
+import { useGetSampleByIdQuery } from '../landing.services';
 import HeroSection from './HeroSection';
 import KeyFeatures from './KeyFeatures';
 import PerformanceSection from './PerformanceSection';

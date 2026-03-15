@@ -43,7 +43,7 @@ const footerSections = [
 
 const Footer = () => {
     return (
-        <footer className="bg-gray-50 border-t mt-20">
+        <footer className="bg-gray-50 border-t">
 
             <div className="max-w-7xl mx-auto px-6 py-14 grid grid-cols-6 gap-10">
 
