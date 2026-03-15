@@ -4,7 +4,7 @@ import ColorSelector from "pages/common/components/ColorSelector";
 import CarOverview from "./CarOverview";
 import VariantList from "./VariantList";
 import Specifications from "./Specifications";
-import BuildPriceDrawer from "./build-car/BuildPriceDrawer";
+import BuildPriceDrawer from "../build-car/BuildPriceDrawer";
 import { useParams } from "react-router-dom";
 
 const carData = {
@@ -43,23 +43,17 @@ const CarDetails = () => {
     return (
         <div className="max-w-6xl mx-auto px-6 py-10">
 
-            {/* Header */}
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-4xl font-semibold">{carData.name}</h1>
                 <p className="text-2xl font-semibold">{carData.price}</p>
             </div>
 
-            {/* Image */}
             <CarImageGallery image={carData.images[selectedColor]} />
-
-            {/* Color Selector */}
             <ColorSelector
                 colors={Object.keys(carData.images)}
                 selectedColor={selectedColor}
                 setSelectedColor={setSelectedColor}
             />
-
-            {/* Info Section */}
             <div className="grid md:grid-cols-3 gap-10 mt-10">
 
                 <CarOverview description={carData.description} />
@@ -69,8 +63,6 @@ const CarDetails = () => {
                 <Specifications specs={carData.specs} />
 
             </div>
-
-            {/* Build Button */}
             <div className="mt-12 flex justify-center">
                 <button
                     onClick={() => setOpenConfigurator(true)}

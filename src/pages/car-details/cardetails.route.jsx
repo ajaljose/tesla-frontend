@@ -1,6 +1,6 @@
 import { lazy } from "react";
 
-const CarDetails = lazy(() => import("./components/CarDetails"));
+const CarDetails = lazy(() => import("./components/car-info/CarDetails"));
 
 export const carDetailsRoutes = [
   {

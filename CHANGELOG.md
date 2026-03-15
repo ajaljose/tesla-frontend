@@ -1,3 +1,8 @@
+# Changelog
+
+## [1.0.1]15-Mar-2025
+### Changed
+- Folder Structure inside routes enhanced
 
 ## [1.0.0]15-Mar-2025
 ### Added

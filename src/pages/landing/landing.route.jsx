@@ -1,6 +1,6 @@
 import { lazy } from "react";
 
-const Landing = lazy(() => import("./components/Landing"));
+const Landing = lazy(() => import("./components/home/Landing"));
 
 export const landingRoutes = [
   {
