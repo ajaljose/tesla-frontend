@@ -6,7 +6,7 @@ export default function baseQuery() {
 
     prepareHeaders: (headers) => {
       const token =
-        localStorage.getItem("kSmart-token") || localStorage.getItem("token");
+        localStorage.getItem("token");
 
       if (token) {
         headers.set("Authorization", `Bearer ${token}`);
