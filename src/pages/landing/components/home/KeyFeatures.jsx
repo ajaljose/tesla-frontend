@@ -2,7 +2,7 @@ import SecondaryFeatureCard from "pages/common/components/SecondaryFeatureCard";
 import { useGetTopGeneralFeaturesQuery } from "pages/landing/landing.services";
 
 const KeyFeatures = () => {
-    const { data: keyFeatures = [] } = useGetTopGeneralFeaturesQuery('model-3');
+    const { data: keyFeatures = [] } = useGetTopGeneralFeaturesQuery();
     return (
         <section className="max-w-7xl mx-auto px-6 py-16">
 
