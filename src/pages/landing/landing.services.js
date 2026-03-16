@@ -3,10 +3,10 @@ import baseApi from "services/baseApi"
 
 export const landingApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getSampleById: build.query({
-      query: (id) => `/sample/${id}`,
+    getVehicleDetailsById: build.query({
+      query: (id) => `/vehicles/${id}`,
     }),
   }),
 })
 
-export const { useGetSampleByIdQuery } = landingApi
+export const { useGetVehicleDetailsByIdQuery } = landingApi

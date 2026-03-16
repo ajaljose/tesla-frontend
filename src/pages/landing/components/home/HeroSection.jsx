@@ -1,22 +1,24 @@
 import FeatureStat from "pages/common/components/FeatureStat";
 import FeatureCardsSection from "./FeatureCardSection";
 import CustomButton from "pages/common/components/CustomButton";
+import { useGetVehicleDetailsByIdQuery } from "pages/landing/landing.services";
 
-const heroImage =
-    "https://digitalassets.tesla.com/tesla-contents/image/upload/b_rgb:FFFFFF,c_pad,dpr_2.0,f_auto,h_1080,q_auto,w_1920/c_pad,h_1080,w_1920/v1770413070/Group_44?pgw=1";
 
 const HeroSection = () => {
-    const heroStats = [
-        { value: "390 mi", label: "Range" },
-        { value: "1.99 s", label: "0-60 mph" },
-        { value: "1,020 hp", label: "Power" },
-        { value: "Autopilot", label: "Included" }
-    ];
+    // const heroStats = [
+    //     { value: "390 mi", label: "Range" },
+    //     { value: "1.99 s", label: "0-60 mph" },
+    //     { value: "1,020 hp", label: "Power" },
+    //     { value: "Autopilot", label: "Included" }
+    // ];
+    const { data } = useGetVehicleDetailsByIdQuery('model-3');
+    console.log(data);
+
     return (
         <section
             className="relative w-full max-h-[1080px] bg-cover bg-center pt-24"
             style={{
-                backgroundImage: `url(${heroImage})`
+                backgroundImage: `url(${data?.hero?.heroImage})`
             }}
         >
 
@@ -25,16 +27,16 @@ const HeroSection = () => {
 
                 <div className="max-w-xl">
 
-                    <p className="text-red-600 tracking-widest font-semibold">
-                        TESLA
+                    <p className="text-red-600 tracking-widest font-semibold uppercase">
+                        {data?.hero?.brand}
                     </p>
 
                     <h1 className="text-6xl font-bold text-red-600 mt-2">
-                        Model S Plaid
+                        {data?.hero?.model}
                     </h1>
 
                     <p className="text-xl text-gray-600 mt-4">
-                        The Future of Performance.
+                        {data?.hero?.tagline}
                     </p>
 
                     <div className="flex items-center gap-6 mt-8">
@@ -61,7 +63,7 @@ const HeroSection = () => {
 
                 <div className="mt-40">
                     <div className="max-w-5xl bg-white rounded-2xl shadow-lg py-6 flex justify-around">
-                        {heroStats.map((stat, index) => (
+                        {data?.hero?.stats.map((stat, index) => (
                             <FeatureStat key={index} {...stat} />
                         ))}
                     </div>
