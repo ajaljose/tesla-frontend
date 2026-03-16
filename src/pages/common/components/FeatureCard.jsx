@@ -28,11 +28,12 @@ const FeatureCard = ({ title, subtitle, image }) => {
                 </p>
             </div>
 
-            <div className="relative z-10 self-start">
+            {(title === 'Find a Tesla') && <div className="relative z-10 self-start">
                 <button className="text-lg sm:text-xl font-bold transition-transform duration-300 group-hover:translate-x-2 cursor-pointer">
                     →
                 </button>
             </div>
+            }
         </div>
     );
 };

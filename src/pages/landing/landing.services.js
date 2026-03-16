@@ -6,7 +6,12 @@ export const landingApi = baseApi.injectEndpoints({
     getVehicleDetailsById: build.query({
       query: (id) => `/vehicles/${id}`,
     }),
+    getTopGeneralFeatures: build.query({
+      query: () => `/vehicles/top-features`,
+    }),
   }),
 })
 
-export const { useGetVehicleDetailsByIdQuery } = landingApi
+export const { useGetVehicleDetailsByIdQuery,
+  useGetTopGeneralFeaturesQuery
+} = landingApi

@@ -72,7 +72,7 @@ const HeroSection = () => {
             </div>
 
             <div className="max-w-7xl mx-auto px-6 mt-10 pb-16">
-                <FeatureCardsSection />
+                <FeatureCardsSection featureCards={data?.features} />
             </div>
         </section>
     );
