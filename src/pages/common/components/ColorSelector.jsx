@@ -4,15 +4,16 @@ const ColorSelector = ({ colors, selectedColor, setSelectedColor }) => {
 
             <p className="font-medium">Color:</p>
 
-            {colors.map((color) => (
+            {colors?.map((color, index) => (
                 <button
-                    key={color}
+                    key={index}
                     onClick={() => setSelectedColor(color)}
-                    className={`w-8 h-8 rounded-full border-2 ${selectedColor === color
+                    className={`w-8 h-8 rounded-full border-2 ${selectedColor?.color_name === color.color_name
                             ? "border-black scale-110"
                             : "border-gray-300"
                         }`}
-                    style={{ backgroundColor: color }}
+                    style={{ backgroundColor: color.color_code }}
+                    title={color.color_name}
                 />
             ))}
 

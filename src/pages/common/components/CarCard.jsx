@@ -51,7 +51,7 @@ const CarCard = ({ car }) => {
                         <CustomButton
                             variant="primary"
                             size="sm"
-                            onClick={() => navigate(PATHS.CAR_DETAILS.replace(':id', car.slug))}
+                            onClick={() => navigate(PATHS.CAR_DETAILS.replace(':slug', car.slug))}
                         >
                             View Details
                         </CustomButton>

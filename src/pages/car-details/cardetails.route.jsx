@@ -4,7 +4,7 @@ const CarDetails = lazy(() => import("./components/car-info/CarDetails"));
 
 export const carDetailsRoutes = [
   {
-    path: "cars/:id",
+    path: "cars/:slug",
     element: <CarDetails />,
   },
 ];

@@ -6,7 +6,10 @@ export const productListApi = baseApi.injectEndpoints({
         getSampleById: build.query({
             query: (id) => `/sample/${id}`,
         }),
+        getVehicleDetails: build.query({
+            query: (slug) => `/vehicles/${slug}`,
+        }),
     }),
 })
 
-export const { useGetSampleByIdQuery } = productListApi
+export const { useGetSampleByIdQuery, useGetVehicleDetailsQuery } = productListApi

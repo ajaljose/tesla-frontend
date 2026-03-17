@@ -6,67 +6,51 @@ import VariantList from "./VariantList";
 import Specifications from "./Specifications";
 import BuildPriceDrawer from "../build-car/BuildPriceDrawer";
 import { useParams } from "react-router-dom";
-
-const carData = {
-    id: "model-3",
-    name: "Tesla Model 3 Long Range",
-    price: "$54,990",
-    description:
-        "The Tesla Model 3 Long Range features dual-motor all-wheel drive with impressive range and top-tier performance.",
-    images: {
-        white:
-            "https://images.unsplash.com/photo-1724084202591-24080fd00e32",
-        black:
-            "https://images.unsplash.com/photo-1704233130715-3ae1659779b2",
-        blue:
-            "https://images.unsplash.com/photo-1767949374185-77f387080e0e",
-        red:
-            "https://plus.unsplash.com/premium_photo-1737677106532-840bafbf98fa",
-    },
-    variants: [
-        "Standard Range Plus",
-        "Long Range AWD",
-        "Performance Model",
-    ],
-    specs: [
-        "Dual Motor AWD",
-        "333 Miles Range (EPA)",
-        "Top Speed: 145 mph",
-        "0-60 mph: 4.2 seconds",
-    ],
-};
+import { useGetVehicleDetailsQuery } from "../../cardetails.services";
 
 const CarDetails = () => {
-    const [selectedColor, setSelectedColor] = useState("white");
-    const [openConfigurator, setOpenConfigurator] = useState(false);
     const { slug } = useParams();
+
+    const { data, isLoading, error } = useGetVehicleDetailsQuery(slug);
+    const [selectedColor, setSelectedColor] = useState(null);
+    const [openConfigurator, setOpenConfigurator] = useState(false);
+
+    if (isLoading) return <div className="flex justify-center items-center h-screen text-2xl">Loading...</div>;
+    if (error) return <div className="flex justify-center items-center h-screen text-2xl text-red-500">Error loading vehicle details</div>;
+
+    const vehicle = data.hero || data;
+    const colors = data.colors || vehicle.colors;
+    const features = data.features || [];
+
+    const currentColor = selectedColor || colors?.[0];
+
     return (
         <div className="max-w-6xl mx-auto px-6 py-10">
 
             <div className="flex justify-between items-center mb-6">
-                <h1 className="text-4xl font-semibold">{carData.name}</h1>
-                <p className="text-2xl font-semibold">{carData.price}</p>
+                <h1 className="text-4xl font-semibold">{vehicle.brand} {vehicle.model}</h1>
+                <p className="text-2xl font-semibold">${vehicle.price}</p>
             </div>
 
-            <CarImageGallery image={carData.images[selectedColor]} />
+            <CarImageGallery image={currentColor?.image_url || vehicle.heroImage} />
             <ColorSelector
-                colors={Object.keys(carData.images)}
-                selectedColor={selectedColor}
+                colors={colors}
+                selectedColor={currentColor}
                 setSelectedColor={setSelectedColor}
             />
             <div className="grid md:grid-cols-3 gap-10 mt-10">
 
-                <CarOverview description={carData.description} />
+                <CarOverview description={vehicle.tagline || vehicle.description} />
 
-                <VariantList variants={carData.variants} />
+                <VariantList variants={features.map(f => f.title)} />
 
-                <Specifications specs={carData.specs} />
+                <Specifications specs={vehicle.stats?.map(s => `${s.label}: ${s.value}`) || []} />
 
             </div>
             <div className="mt-12 flex justify-center">
                 <button
                     onClick={() => setOpenConfigurator(true)}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-xl text-lg font-medium transition"
+                    className="bg-red-600 hover:bg-blue-700 text-white px-10 py-4 rounded-xl text-lg font-medium transition"
                 >
                     Build and Price →
                 </button>

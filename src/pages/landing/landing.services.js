@@ -3,8 +3,8 @@ import baseApi from "services/baseApi"
 
 export const landingApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getVehicleDetailsById: build.query({
-      query: (id) => `/vehicles/${id}`,
+    getVehicleDetailsByRandom: build.query({
+      query: () => `/vehicles/random`,
     }),
     getTopGeneralFeatures: build.query({
       query: () => `/vehicles/top-features`,
@@ -12,6 +12,6 @@ export const landingApi = baseApi.injectEndpoints({
   }),
 })
 
-export const { useGetVehicleDetailsByIdQuery,
+export const { useGetVehicleDetailsByRandomQuery,
   useGetTopGeneralFeaturesQuery
 } = landingApi
