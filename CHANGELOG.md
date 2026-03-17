@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.5]17-Mar-2025
+### Changed
+- Updated car details routing and API integrations
+
 ## [1.0.4]17-Mar-2025
 ### Added
 - Product List page functinality and API integrated
