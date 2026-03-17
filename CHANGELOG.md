@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.5]17-Mar-2025
+### Added
+- Base Path Updated
+
 ## [1.0.4]17-Mar-2025
 ### Added
 - Product List page functinality and API integrated
