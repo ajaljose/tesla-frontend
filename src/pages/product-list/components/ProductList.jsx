@@ -2,65 +2,44 @@ import { useState } from "react";
 import Pagination from "pages/common/components/Pagination";
 import CarCard from "pages/common/components/CarCard";
 import Filters from "pages/common/components/Filters";
+import { useGetCarsQuery } from "../productlist.services";
 
 const ProductList = () => {
-    const cars = [
-        {
-            id: 1,
-            slug: 'model-s',
-            name: "Model S",
-            range: "405 mi",
-            price: 'Rs100000',
-            topSpeed: "200 mph",
-            image:
-                "https://images.unsplash.com/photo-1700411881984-971bc29083bd"
-        },
-        {
-            id: 2,
-            slug: 'model-3',
-            name: "Model 3",
-            range: "358 mi",
-            price: 'Rs100000',
-            topSpeed: "162 mph",
-            image:
-                "https://upload.wikimedia.org/wikipedia/commons/9/91/2019_Tesla_Model_3_Performance_AWD_Front.jpg"
-        },
-        {
-            id: 3,
-            slug: 'model-x',
-            name: "Model X",
-            range: "348 mi",
-            price: 'Rs100000',
-            topSpeed: "163 mph",
-            image:
-                "https://plus.unsplash.com/premium_photo-1737677106532-840bafbf98fa"
-        },
-        {
-            id: 4,
-            slug: 'model-y',
-            name: "Model Y",
-            range: "396 mi",
-            price: 'Rs100000',
-            topSpeed: "155 mph",
-            image:
-                "https://images.unsplash.com/photo-1622315471002-8f5617067fc4"
-        }
-    ];
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState("");
+    const [model, setModel] = useState("");
+    const [range, setRange] = useState("");
+    const [type, setType] = useState("");
 
-    const itemsPerPage = 6;
+    const itemsPerPage = 2;
+    const { data, isLoading, isError, error } = useGetCarsQuery({
+        name: search,
+        model,
+        range,
+        type,
+        page: currentPage,
+        limit: itemsPerPage,
+    });
 
-    const filteredCars = cars.filter((car) =>
-        car.name.toLowerCase().includes(search.toLowerCase())
-    );
+    if (isLoading) {
+        return (
+            <div className="flex justify-center items-center h-96">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-red-600"></div>
+            </div>
+        );
+    }
 
-    const totalPages = Math.ceil(filteredCars.length / itemsPerPage);
+    if (isError) {
+        return (
+            <div className="max-w-7xl mx-auto px-6 py-10 text-center">
+                <h2 className="text-2xl font-semibold text-red-600 mb-4">Oops! Something went wrong.</h2>
+                <p className="text-gray-600">{error?.data?.message || "Failed to load cars. Please try again later."}</p>
+            </div>
+        );
+    }
 
-    const paginatedCars = filteredCars.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
-    );
+    const cars = data?.vehicles || [];
+    const totalPages = data?.totalPages || 1;
 
     return (
         <div className="max-w-7xl mx-auto px-6 py-10">
@@ -69,19 +48,36 @@ const ProductList = () => {
                 Explore Our Cars
             </h1>
 
-            <Filters search={search} setSearch={setSearch} />
+            <Filters
+                search={search}
+                setSearch={setSearch}
+                model={model}
+                setModel={setModel}
+                range={range}
+                setRange={setRange}
+                type={type}
+                setType={setType}
+            />
 
-            <div className="grid grid-cols-3 gap-8">
-                {paginatedCars.map((car) => (
-                    <CarCard key={car.id} car={car} />
-                ))}
-            </div>
+            {cars.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {cars.map((car) => (
+                        <CarCard key={car.id} car={car} />
+                    ))}
+                </div>
+            ) : (
+                <div className="text-center py-20">
+                    <p className="text-xl text-gray-500">No cars found matching your criteria.</p>
+                </div>
+            )}
+
 
             <Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onPageChange={setCurrentPage}
             />
+
 
         </div>
     );

@@ -9,7 +9,7 @@ const CarCard = ({ car }) => {
 
             <div
                 className="h-64 bg-cover bg-center"
-                style={{ backgroundImage: `url(${car.image})` }}
+                style={{ backgroundImage: `url(${car.imageUrl})` }}
             ></div>
 
             <div
@@ -22,7 +22,7 @@ const CarCard = ({ car }) => {
 
                 <div className="bg-gradient-to-t from-white via-white/80 to-transparent p-4">
 
-                    <h3 className="text-xl font-semibold">{car.name}</h3>
+                    <h3 className="text-xl font-semibold">{car.model}</h3>
                     <p className="text-gray-700 font-medium">{car.price}</p>
 
                     <div
