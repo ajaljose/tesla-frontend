@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.4]17-Mar-2025
+### Added
+- Product List page functinality and API integrated
+
+## [1.0.3]16-Mar-2025
+### Added
+- Key Features in Landing API integrated
+
 ## [1.0.2]16-Mar-2025
 ### Added
 - Hero Section API integrated
