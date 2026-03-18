@@ -1,4 +1,4 @@
-const SecondaryFeatureCard = ({ image, title, description }) => {
+const SecondaryFeatureCard = ({ image, title, description, showBtn = true }) => {
     return (
         <div className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-md transition">
 
@@ -17,10 +17,10 @@ const SecondaryFeatureCard = ({ image, title, description }) => {
                     {description}
                 </p>
 
-                <button className="flex items-center gap-2 mt-6 text-gray-900 font-medium">
+                {(showBtn && <button className="flex items-center gap-2 mt-6 text-gray-900 font-medium">
                     Learn More
                     <span>›</span>
-                </button>
+                </button>)}
 
             </div>
         </div>

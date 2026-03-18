@@ -1,18 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { STATE_REDUCER_KEY } from 'common/constants'
 
 const initialState = {
-  sample: {},
+  heroCarSlug: '',
+  heroModel: '',
 }
 
 const slice = createSlice({
-  name: 'common-services',
+  name: STATE_REDUCER_KEY,
   initialState,
   reducers: {
-    setSample(state, action) {
-      state.sample = action.payload
+    setHeroCarSlug(state, action) {
+      state.heroCarSlug = action.payload
+    },
+    setHeroModel(state, action) {
+      state.heroModel = action.payload
     },
   },
 })
 
-export const { setSample } = slice.actions
+export const { setHeroCarSlug, setHeroModel } = slice.actions
 export const { reducer } = slice

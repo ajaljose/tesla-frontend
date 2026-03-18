@@ -1,3 +1,4 @@
+import { useGetVehicleModelsQuery, useGetVehicleTypesQuery } from "pages/common-services/common.services";
 import CustomButton from "./CustomButton";
 
 const Filters = ({ search, setSearch, model, setModel, range, setRange, type, setType }) => {
@@ -7,6 +8,8 @@ const Filters = ({ search, setSearch, model, setModel, range, setRange, type, se
         setRange("");
         setType("");
     };
+    const { data: vehicleModels = [] } = useGetVehicleModelsQuery()
+    const { data: vehicleTypes = [] } = useGetVehicleTypesQuery()
 
     return (
         <div className="bg-white shadow rounded-xl p-4 flex flex-wrap gap-4 mb-10">
@@ -24,12 +27,13 @@ const Filters = ({ search, setSearch, model, setModel, range, setRange, type, se
                 onChange={(e) => setModel(e.target.value)}
                 className="border rounded px-3 py-2 flex-1 min-w-[150px] h-10"
             >
-                <option value="">All Models</option>
-                <option value='Model 3'>Model 3</option>
-                <option value='Model X'>Model X</option>
-                <option value='Model Y'>Model Y</option>
-                <option value='Model S'>Model S</option>
-                <option value='Cybertruck'>Cybertruck</option>
+                <option value="">Any Model</option>
+                {
+                    vehicleModels.map((model, index) => (
+                        <option key={index} value={model}>
+                            {model}
+                        </option>
+                    ))}
             </select>
 
             <select
@@ -51,9 +55,12 @@ const Filters = ({ search, setSearch, model, setModel, range, setRange, type, se
                 className="border rounded px-3 py-2 flex-1 min-w-[150px] h-10"
             >
                 <option value="">Any Type</option>
-                <option value='SUV'>SUV</option>
-                <option value='Sedan'>Sedan</option>
-                <option value='Truck'>Truck</option>
+                {
+                    vehicleTypes.map((type, index) => (
+                        <option key={index} value={type}>
+                            {type}
+                        </option>
+                    ))}
             </select>
 
             <CustomButton

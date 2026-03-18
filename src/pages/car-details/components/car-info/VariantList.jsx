@@ -1,18 +1,21 @@
-const VariantList = ({ variants }) => {
-    return (
-        <div>
-            <h3 className="text-xl font-semibold mb-3">
-                Available Variants
-            </h3>
+import SecondaryFeatureCard from "pages/common/components/SecondaryFeatureCard";
 
-            <ul className="space-y-2">
-                {variants.map((variant, index) => (
-                    <li key={index} className="text-gray-700">
-                        • {variant}
-                    </li>
+const VariantList = ({ variants }) => {
+
+    return (
+        <section className="max-w-7xl mx-auto px-6 py-16">
+
+            <h2 className="text-3xl font-semibold mb-10">
+                Key Features
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {variants.map((feature, index) => (
+                    <SecondaryFeatureCard key={index} {...feature} showBtn={false} />
                 ))}
-            </ul>
-        </div>
+            </div>
+
+        </section>
     );
 };
 

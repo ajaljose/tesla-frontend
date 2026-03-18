@@ -2,11 +2,29 @@ import FeatureStat from "pages/common/components/FeatureStat";
 import FeatureCardsSection from "./FeatureCardSection";
 import CustomButton from "pages/common/components/CustomButton";
 import { useGetVehicleDetailsByRandomQuery } from "pages/landing/landing.services";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { setHeroCarSlug, setHeroModel } from "pages/common-services/slice";
+import CustomLoader from "pages/common/components/CustomLoader";
+import { useNavigate } from "react-router-dom";
+import { PATHS } from "pages/common/constants";
 
 
 const HeroSection = () => {
-    const { data } = useGetVehicleDetailsByRandomQuery();
-    console.log(data);
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const { data, isLoading } = useGetVehicleDetailsByRandomQuery();
+
+    useEffect(() => {
+        dispatch(setHeroCarSlug(data?.hero?.slug))
+        dispatch(setHeroModel(data?.hero?.model))
+    }, [data, dispatch])
+
+    if (isLoading) {
+        return (
+            <CustomLoader />
+        );
+    }
 
     return (
         <>
@@ -39,7 +57,7 @@ const HeroSection = () => {
                             <CustomButton
                                 variant="primary"
                                 size="lg"
-                                onClick={() => console.log("Explore")}
+                                onClick={() => navigate(PATHS.CAR_DETAILS.replace(':slug', data?.hero?.slug))}
                                 rounded="full"
                             >
                                 Explore Now
@@ -48,7 +66,7 @@ const HeroSection = () => {
                             <CustomButton
                                 variant="secondary"
                                 size="lg"
-                                onClick={() => console.log("Explore")}
+                                onClick={() => window.open("https://www.youtube.com", "_blank")}
                                 rounded="full"
                             >
                                 ▶ Watch Demo
@@ -56,10 +74,14 @@ const HeroSection = () => {
                         </div>
                     </div>
 
-                    <div className="mt-50 pb-16">
-                        <div className="max-w-5xl bg-white rounded-2xl shadow-lg py-6 flex justify-around">
+                    <div className="mt-12 pb-16 px-4 sm:px-6 lg:px-0">
+                        <div className="max-w-5xl bg-white/2 0 backdrop-blur-lg rounded-2xl shadow-lg py-6 flex flex-col sm:flex-row sm:flex-wrap sm:justify-between gap-6">
                             {data?.hero?.stats.map((stat, index) => (
-                                <FeatureStat key={index} {...stat} />
+                                <FeatureStat
+                                    key={index}
+                                    className="flex-1 min-w-[150px]"
+                                    {...stat}
+                                />
                             ))}
                         </div>
                     </div>

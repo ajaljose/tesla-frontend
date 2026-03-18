@@ -3,6 +3,7 @@ import Pagination from "pages/common/components/Pagination";
 import CarCard from "pages/common/components/CarCard";
 import Filters from "pages/common/components/Filters";
 import { useGetCarsQuery } from "../productlist.services";
+import CustomLoader from "pages/common/components/CustomLoader";
 
 const ProductList = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -11,7 +12,7 @@ const ProductList = () => {
     const [range, setRange] = useState("");
     const [type, setType] = useState("");
 
-    const itemsPerPage = 2;
+    const itemsPerPage = 6;
     const { data, isLoading, isError, error } = useGetCarsQuery({
         name: search,
         model,
@@ -23,9 +24,7 @@ const ProductList = () => {
 
     if (isLoading) {
         return (
-            <div className="flex justify-center items-center h-96">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-red-600"></div>
-            </div>
+            <CustomLoader />
         );
     }
 
@@ -71,12 +70,13 @@ const ProductList = () => {
                 </div>
             )}
 
-
-            <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={setCurrentPage}
-            />
+            <div className="w-full flex justify-end">
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={setCurrentPage}
+                />
+            </div>
 
 
         </div>

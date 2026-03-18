@@ -33,7 +33,7 @@ const InfoSection = () => {
     };
     return (
         <section
-            className="relative w-full min-h-[600px] bg-cover bg-center flex items-center"
+            className="relative w-full min-h-[600px] bg-cover bg-center flex items-center p-10"
             style={{ backgroundImage: `url(${backgroundImage})` }}
         >
             <div className="absolute inset-0 bg-gradient-to-b from-white via-white/50 to-transparent"></div>
@@ -50,9 +50,15 @@ const InfoSection = () => {
                         {description}
                     </p>
 
-                    <div className="flex gap-14 my-10">
+                    <div className="flex flex-col sm:flex-row sm:gap-8 lg:gap-14 my-10">
                         {stats.map((stat, index) => (
-                            <div key={index} className={index !== 0 ? "border-l border-gray-300 pl-14" : ""}>
+                            <div
+                                key={index}
+                                className={`
+        ${index !== 0 ? "sm:border-l sm:pl-4 lg:pl-14" : ""}
+        mt-6 sm:mt-0
+      `}
+                            >
                                 <h3 className="text-3xl font-semibold">{stat.value}</h3>
                                 <p className="text-gray-600">{stat.label}</p>
                             </div>

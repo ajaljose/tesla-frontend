@@ -1,37 +1,11 @@
 import SelectableOptionList from "pages/common/components/SelectOptionList";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { buildCarConfig } from "../../cardetails.helpers";
+import CustomButton from "pages/common/components/CustomButton";
 
-const BuildPriceDrawer = ({ open, onClose, slug }) => {
+const BuildPriceDrawer = ({ open, onClose, carData }) => {
 
-    const data = {
-        "name": "Model 3",
-        "basePrice": 36990,
-        "stats": {
-            "range": "363 mi",
-            "topSpeed": "125 mph",
-            "zeroToSixty": "4.9 sec"
-        },
-        "variants": [
-            { "name": "Rear Wheel Drive", "price": 0 },
-            { "name": "Premium RWD", "price": 5500 },
-            { "name": "Performance", "price": 12000 }
-        ],
-        "colors": [
-            { "name": "Stealth Grey", "price": 0, "hex": "#4a4a4a" },
-            { "name": "Pearl White", "price": 1000, "hex": "#ffffff" },
-            { "name": "Deep Blue", "price": 1000, "hex": "#1e3a8a" },
-            { "name": "Red Multi-Coat", "price": 2000, "hex": "#dc2626" }
-        ],
-        "wheels": [
-            { "name": "18 Photon Wheels", "price": 0 },
-            { "name": "19 Sport Wheels", "price": 1500 }
-        ],
-        "accessories": [
-            { "name": "Center Console Tray", "price": 35 },
-            { "name": "Projection Lights", "price": 65 },
-            { "name": "Roof Rack", "price": 400 }
-        ]
-    };
+    const data = useMemo(() => buildCarConfig(carData), [carData]);
 
     const [car] = useState(data);
 
@@ -40,12 +14,7 @@ const BuildPriceDrawer = ({ open, onClose, slug }) => {
     const [wheel, setWheel] = useState(data.wheels[0]);
     const [accessories, setAccessories] = useState([]);
 
-    /* Fetch car from API */
-
-    console.log('slug', slug)
     if (!car) return null;
-
-    /* Accessories toggle */
 
     const toggleAccessory = (item) => {
         setAccessories((prev) =>
@@ -55,19 +24,17 @@ const BuildPriceDrawer = ({ open, onClose, slug }) => {
         );
     };
 
-    /* Price calculation */
-
     const accessoriesTotal = accessories.reduce(
         (acc, item) => acc + item.price,
         0
     );
 
     const total =
-        car.basePrice +
-        variant.price +
-        color.price +
-        wheel.price +
-        accessoriesTotal;
+        Number(car.basePrice) +
+        Number(variant.price) +
+        Number(color.price) +
+        Number(wheel.price) +
+        Number(accessoriesTotal);
 
     return (
         <>
@@ -87,30 +54,20 @@ const BuildPriceDrawer = ({ open, onClose, slug }) => {
             >
 
                 <div className="p-6">
-
-                    {/* Header */}
-
                     <div className="flex justify-between mb-6">
                         <h2 className="text-xl font-semibold">{car.name}</h2>
-                        <button onClick={onClose}>✕</button>
+                        <button onClick={onClose} className="bg-red-500 text-white rounded-full w-[30px]">✕</button>
                     </div>
-
-                    {/* Stats */}
 
                     <div className="flex justify-between text-center mb-6 text-sm">
                         <div>
-                            <p className="font-semibold">{car.stats.range}</p>
-                            <p className="text-gray-500">Range</p>
+                            <p className="font-semibold text-2xl">{car.stats.range}</p>
+                            <p className="text-gray-500 ">Range</p>
                         </div>
 
                         <div>
-                            <p className="font-semibold">{car.stats.topSpeed}</p>
+                            <p className="font-semibold text-2xl">{car.stats.topSpeed}</p>
                             <p className="text-gray-500">Top Speed</p>
-                        </div>
-
-                        <div>
-                            <p className="font-semibold">{car.stats.zeroToSixty}</p>
-                            <p className="text-gray-500">0-60</p>
                         </div>
                     </div>
 
@@ -156,20 +113,23 @@ const BuildPriceDrawer = ({ open, onClose, slug }) => {
 
                 </div>
 
-                {/* Sticky Price Footer */}
 
                 <div className="sticky bottom-0 bg-white border-t p-4">
 
                     <div className="flex justify-between mb-3">
                         <span className="font-semibold">Vehicle Price</span>
                         <span className="font-semibold">
-                            ${total.toLocaleString()}
+                            ${Number(total).toFixed(2)}
                         </span>
                     </div>
 
-                    <button className="w-full bg-black text-white py-3 rounded-lg">
+                    <CustomButton
+                        variant=""
+                        size="lg"
+                        className='w-full bg-black text-white'
+                    >
                         Order Now
-                    </button>
+                    </CustomButton>
 
                 </div>
 
