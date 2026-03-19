@@ -1,8 +1,16 @@
 # Changelog
 
+## [1.0.7]19-Mar-2025
+### Added
+- Readme.md file added
+
+## [1.0.6]18-Mar-2025
+### Added
+- Added Contact Us page, dynamic hero car data display, and common UI components.
+
 ## [1.0.5]17-Mar-2025
 ### Changed
-- Updated car details routing and API integrations
+- Added Contact Us page, dynamic hero car data display, and common UI components.
 
 ## [1.0.4]17-Mar-2025
 ### Added
